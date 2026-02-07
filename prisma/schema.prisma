@@ -11,9 +11,19 @@ model user {
   id Int @id @default(autoincrement())
   name String
   email String @unique
+  role role @default(user)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   posts post[]
+  profile userProfile?
+}
+
+model userProfile {
+  id Int @id @default(autoincrement())
+  bio String
+  age Int
+  userId Int @unique
+  user user @relation(fields: [userId], references: [id])
 }
 
 model post {
@@ -26,4 +36,9 @@ model post {
 
   authorId Int
   author user @relation(fields: [authorId], references: [id])
+}
+
+enum role {
+  user
+  admin
 }
