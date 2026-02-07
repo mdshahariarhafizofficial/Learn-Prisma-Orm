@@ -11,14 +11,30 @@ const main = async () => {
     //     }
     // });
 
-    const createPost = await prisma.post.create({
-        data: {
-            title: "this is a title 1",
-            content: "this is a content 1",
-            authorId: 1
+    // const createPost = await prisma.post.create({
+    //     data: {
+    //         title: "this is a title 1",
+    //         content: "this is a content 1",
+    //         authorId: 1
+    //     }
+    // })
+
+
+    // console.log("Post created: ", createPost);
+
+    // Retrive all data
+    const retriveAllData = await prisma.user.findMany({
+        // include: {
+        //     posts: true,
+        //     profile: true
+        // }
+        select: {
+            id: true,
+            email: true
         }
-    })
-    console.log("Post created: ", createPost);
+    });
+    console.log(retriveAllData);
+     
 }
 
 main();
